@@ -21,7 +21,11 @@ GOAL FOR EACH PROJECT
 
 -[] attempt to get modifications accepted by original project
 
--claywebb/robot-framework
+~~-claywebb/robot-framework~~ this code was stricken due to difficulties using gpio pins with the raspberry pi 3. 
+
+Common issues with the raspberry pi 3 in accessing gpio pins using sudo apt-get rpio.gpio. 
+
+The raspberry pi 3 was not recognized as a raspberry pi.
 
 -[] improve documentation
 
