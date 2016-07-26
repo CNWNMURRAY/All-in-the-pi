@@ -5,11 +5,11 @@ This project is a homework assignment that requires us to contribute to and or m
 
 THREE OPEN SOURCE PROJECTS
 
--samuelclay/Raspberry-Pi-Photo-Frame
+-[samuelclay/Raspberry-Pi-Photo-Frame] (https://github.com/samuelclay/Raspberry-Pi-Photo-Frame.git)
 
--claywebb/robot-framework
+-[simonmonk/raspirobotboard3] (https://github.com/simonmonk/raspirobotboard3.git)
 
--jpescada/TwitterPiBot
+-[jpescada/TwitterPiBot] (https://github.com/jpescada/TwitterPiBot.git)
 
 GOAL FOR EACH PROJECT
 
