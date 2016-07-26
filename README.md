@@ -17,21 +17,23 @@ GOAL FOR EACH PROJECT
 
 -[] add robotic functionailty meaning it will be able to move.
 
--[] add a calendar reader and text reader (task, todo list)
+-[X] add a calendar reader and text reader (task, todo list)
 
--[] attempt to get modifications accepted by original project
+-[X] attempt to get modifications accepted by original project
 
 ~~-claywebb/robot-framework~~ this code was stricken due to difficulties using gpio pins with the raspberry pi 3. 
 
-Common issues with the raspberry pi 3 in accessing gpio pins using sudo apt-get rpio.gpio. 
+Common issues with the raspberry pi 3 in accessing gpio pins using sudo apt-get rpio.gpio. The raspberry pi 3 was not recognized as a raspberry pi.
 
-The raspberry pi 3 was not recognized as a raspberry pi.
+This was also an issue with the raspberry pi2 but it was solved.
+
+The goals for the project were:
 
 -[] improve documentation
 
--[] add photo display
+-[X] add calendar/photo display
 
--[] add text reader
+-[X] add text reader
 
 -[] attempt to get modifications accepted
 
@@ -39,9 +41,9 @@ The raspberry pi 3 was not recognized as a raspberry pi.
 
 -[] add motion sensor
 
--[] add photo and calendar display
+-[X] add photo and calendar display
 
--[] read text other than twitter
+-[X] read calendar events
 
 -[] attempt to get modifications accepted
 
@@ -49,11 +51,13 @@ Goal for All-in-the-pi
 
 We are trying to make a raspberrypi robot that will display a google calendar, read off a todo list or task list and then show photos when it senses motion. The raspberrypi robot should remind it's owner of any events or task they have to do that day, update them on current events that intrest them and to stop and smell the roses with pictures of family and friends.
 
-Hardware Parts
+Hardware Parts for a rover
 
 -[] Raspberry pi 3
 
 -[] LCD screen
+
+-[] HDMI cord length depends on robot ddesign
 
 -[] PIR (motion) sensor
 
