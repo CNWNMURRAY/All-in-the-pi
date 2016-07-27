@@ -82,3 +82,4 @@ $pip install httplib2
 Test-to-speech
 $ sudo apt-get install flite
 $ sudo pip install puyttsx
+$ sudo pip install pypiwin32
