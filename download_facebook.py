@@ -8,7 +8,8 @@ import logging
 # modified in the Explorer's Get Access Token button):
 # https://graph.facebook.com/USER_NAME/photos?type=uploaded&fields=source&access_token=ACCESS_TOKEN_HERE
 FACEBOOK_USER_ID = "100012912911204"
-FACEBOOK_ACCESS_TOKEN = "CAACEdEose0cBAG3VUz3IbZCk79kZAs5uCkeXW6ZCVZASBuRXGAA3t6CAQpcUAxKjGFYZAmTKiu6Ja5rrAb7ZAYnglEgrBgqK1CQZC6uXVpnxYIRWbMeiY8w8FWpNL4qaqZCEF1tzWXqmacL7rXiUQZCOaCdh8AU9L8Bx4rUFkwgicwAeubZAQC8ABOXPLihRvJXNkaXZBjq1ZAeZB7hXsmbEZCYkji"
+FACEBOOK_ACCESS_TOKEN = "EAACEdEose0cBADpZCxmrd2XDd7mZADhHcO7OqawT02KXX3jIlstdANvsbIf3Ri7U8PNBQK1efeQiexiXwhwpKVQwToLdBGi2coXB63HmPp6IO6jPcAxjFrhyUFDD3BKEDT8HhjL8aaBcxzUVefkMg8BFlt3dkg8XM5zVQAgux9HzQu2vM4"
+
 
 def get_logger(label='lvm_cli', level='INFO'):
     """
@@ -20,21 +21,22 @@ def get_logger(label='lvm_cli', level='INFO'):
     logger.setLevel(getattr(logging, level))
     return logger
 
+
 def urlrequest(url):
     """
     Make a url request
     """
     req = urlopen(url)
-    data = req.read()
-    return data
+    return req.read()
+
 
 def get_json(url):
     """
     Make a url request and return as a JSON object
     """
     res = urlrequest(url)
-    data = loads(res)
-    return data
+    return loads(res)
+
 
 def get_next(data):
     """
@@ -46,6 +48,7 @@ def get_next(data):
     except KeyError:
         return None
 
+
 def get_images(data):
     """
     Get all images from facebook JSON response,
@@ -55,6 +58,7 @@ def get_images(data):
         return data['data']
     except KeyError:
         return []
+
 
 def get_all_images(url):
     """
@@ -69,31 +73,35 @@ def get_all_images(url):
     else:
         return images + get_all_images(next)
 
+
 def get_url(userid, access_token):
     """
     Generates a useable facebook graph API url
     """
     root = 'https://graph.facebook.com/'
     endpoint = '%s/photos?type=uploaded&fields=source,updated_time&access_token=%s' % \
-                (userid, access_token)
+               (userid, access_token)
     return '%s%s' % (root, endpoint)
+
 
 def download_file(url, filename):
     """
     Write image to a file.
     """
     data = urlrequest(url)
-    path = 'C:/photos/%s' % filename
+    path = '/home/pi/photoframe/facebook/%s' % filename
     f = open(path, 'w')
     f.write(data)
     f.close()
+
 
 def create_time_stamp(timestring):
     """
     Creates a pretty string from time
     """
     date = dateparser.parse(timestring)
-    return date.strftime('%Y-%m-%d-%H-%M-%S')
+    return date.strftime('%Y-%m-%d-%H:%M:%S')
+
 
 def download(userid, access_token):
     """
@@ -108,6 +116,7 @@ def download(userid, access_token):
         logger.info('Downloading %s' % image['source'])
         filename = '%s.jpg' % create_time_stamp(image['created_time'])
         download_file(image['source'], filename)
+
 
 if __name__ == '__main__':
     download(FACEBOOK_USER_ID, FACEBOOK_ACCESS_TOKEN)
