@@ -1,14 +1,15 @@
 from urllib import urlopen
 from json import loads
-from sys import argv 
+from sys import argv
 import dateutil.parser as dateparser
 import logging
 
-# plugin your username and access_token (Token can be get and 
+# plugin your username and access_token (Token can be get and
 # modified in the Explorer's Get Access Token button):
 # https://graph.facebook.com/USER_NAME/photos?type=uploaded&fields=source&access_token=ACCESS_TOKEN_HERE
 FACEBOOK_USER_ID = "10203552316662505"
-FACEBOOK_ACCESS_TOKEN = "CAACEdEose0cBAKtF3S5WUN4qSRxljDPWoB28DJmbsd6O71Nz7REORmZAGYrYD8wW8kNE3CDdZBFxZCu4aMQZBtz5XLftzLjlnVjNZBu7TNW6YCEKdJXEVS5ZAZA8mMEypQLrXviYrj68QFdpeaaqiIZBjxSQ0tgZB9x8ME6LjZCUXycZBLzZADUnTN75kjLUNPidmKbTlj5OhEEvnWmkU4ATFCVkUz83JfcHhNkZD"
+FACEBOOK_ACCESS_TOKEN = "EAACEdEose0cBADpZCxmrd2XDd7mZADhHcO7OqawT02KXX3jIlstdANvsbIf3Ri7U8PNBQK1efeQiexiXwhwpKVQwToLdBGi2coXB63HmPp6IO6jPcAxjFrhyUFDD3BKEDT8HhjL8aaBcxzUVefkMg8BFlt3dkg8XM5zVQAgux9HzQu2vM4"
+
 
 def get_logger(label='lvm_cli', level='INFO'):
     """
@@ -20,6 +21,7 @@ def get_logger(label='lvm_cli', level='INFO'):
     logger.setLevel(getattr(logging, level))
     return logger
 
+
 def urlrequest(url):
     """
     Make a url request
@@ -27,12 +29,14 @@ def urlrequest(url):
     req = urlopen(url)
     return req.read()
 
+
 def get_json(url):
     """
     Make a url request and return as a JSON object
     """
     res = urlrequest(url)
     return loads(res)
+
 
 def get_next(data):
     """
@@ -44,6 +48,7 @@ def get_next(data):
     except KeyError:
         return None
 
+
 def get_images(data):
     """
     Get all images from facebook JSON response,
@@ -54,10 +59,11 @@ def get_images(data):
     except KeyError:
         return []
 
+
 def get_all_images(url):
     """
     Get all images using recursion.
-    """    
+    """
     data = get_json(url)
     images = get_images(data)
     next = get_next(data)
@@ -67,14 +73,16 @@ def get_all_images(url):
     else:
         return images + get_all_images(next)
 
+
 def get_url(userid, access_token):
     """
     Generates a useable facebook graph API url
     """
     root = 'https://graph.facebook.com/'
     endpoint = '%s/photos?type=uploaded&fields=source,updated_time&access_token=%s' % \
-                (userid, access_token)
+               (userid, access_token)
     return '%s%s' % (root, endpoint)
+
 
 def download_file(url, filename):
     """
@@ -86,12 +94,14 @@ def download_file(url, filename):
     f.write(data)
     f.close()
 
+
 def create_time_stamp(timestring):
     """
     Creates a pretty string from time
     """
     date = dateparser.parse(timestring)
     return date.strftime('%Y-%m-%d-%H:%M:%S')
+
 
 def download(userid, access_token):
     """
@@ -106,6 +116,7 @@ def download(userid, access_token):
         logger.info('Downloading %s' % image['source'])
         filename = '%s.jpg' % create_time_stamp(image['created_time'])
         download_file(image['source'], filename)
-    
+
+
 if __name__ == '__main__':
     download(FACEBOOK_USER_ID, FACEBOOK_ACCESS_TOKEN)
