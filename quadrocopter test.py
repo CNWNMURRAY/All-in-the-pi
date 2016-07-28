@@ -1,41 +1,64 @@
-#Install the raspberry pi 3  library in a Terminal window using
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(13, GPIO.OUT)
 
-$ sudo pip install rrb3 
+dc = 5
 
-#Open a Python console by typing the following into a Terminal window:
+servo = GPIO.PWM(13,2000)
+servo.start(10)
+print('***Connect Battery & Press ENTER to start')
+res = raw_input()
+servo.ChangeDutyCycle(5)
+print('***Press ENTER to start')
+res = raw_input()
 
-$ sudo python #(python 2)
-$ sudo apt-get (python #(python 3)
+GPIO.setup(12, GPIO.OUT)
 
-import RPi.GPIO as GPIO # imports general-purpose input/output (GPIO) is a generic pin on an integrated circuit 
-#whose behavior—including whether it is an input or output pin—is controllable by the user at run time.
-import time
+dc = 5
 
-#type the following, one line at a time:
+servo = GPIO.PWM(12,2000)
+servo.start(10)
+print('***Connect Battery & Press ENTER to start')
+res = raw_input()
+servo.ChangeDutyCycle(5)
+print('***Press ENTER to start')
+res = raw_input()
 
-from rrb3 import *
-rr = RRB3(9, 6)
-rr.set_led1(1)
-rr.set_led1(0)
-rr.set_led2(1)
-rr.set_led2(0)
-rr.sw1_closed()
-#should display the answer "False" because no switch is attached.
+GPIO.setup(16, GPIO.OUT)
 
-#LED LIGHTS
-#To turn LED1 on just do:
+dc = 5
 
-rr.set_led1(1)
+servo = GPIO.PWM(16,2000)
+servo.start(10)
+print('***Connect Battery & Press ENTER to start')
+res = raw_input()
+servo.ChangeDutyCycle(5)
+print('***Press ENTER to start')
+res = raw_input()
 
-#To turn it off again do:
+print ('increase > a | decrease > z | save Wh > n | set Wh > h|quit > 9')
 
-rr.set_led1(0)
+cycling = True
+try:
+    while cycling:
+        servo.ChangeDutyCycle(dc)
+        res = raw_input()
+        if res == 'a':
+            dc = dc + 0.05
+        if res == 'z':
+            dc = dc - 0.05
+        if res == 'h':
+            mymotor.setWh()
+        if res == '9':
+            cycling = False
+finally:
+    # shut down cleanly
+    servo.stop()
+    print ("dc var setting is: ")
+    print (dc)
 
-#To turn the Open Collector OC1 output on just do:
 
-rr.set_oc1(1)
-
-#To turn it off again do:
-
-rr.set_oc1(0)
-
+print('***Press ENTER to quit')
+res = raw_input()
+servo.stop()
+GPIO.cleanup()
