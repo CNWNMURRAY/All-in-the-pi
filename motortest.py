@@ -1,10 +1,10 @@
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
 
 dc = 5
 
-servo = GPIO.PWM(11,50)
+servo = GPIO.PWM(13,2000)
 servo.start(10)
 print('***Connect Battery & Press ENTER to start')
 res = raw_input()
