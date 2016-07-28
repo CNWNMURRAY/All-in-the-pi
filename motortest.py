@@ -12,6 +12,30 @@ servo.ChangeDutyCycle(5)
 print('***Press ENTER to start')
 res = raw_input()
 
+GPIO.setup(12, GPIO.OUT)
+
+dc = 5
+
+servo = GPIO.PWM(12,2000)
+servo.start(10)
+print('***Connect Battery & Press ENTER to start')
+res = raw_input()
+servo.ChangeDutyCycle(5)
+print('***Press ENTER to start')
+res = raw_input()
+
+GPIO.setup(16, GPIO.OUT)
+
+dc = 5
+
+servo = GPIO.PWM(16,2000)
+servo.start(10)
+print('***Connect Battery & Press ENTER to start')
+res = raw_input()
+servo.ChangeDutyCycle(5)
+print('***Press ENTER to start')
+res = raw_input()
+
 print ('increase > a | decrease > z | save Wh > n | set Wh > h|quit > 9')
 
 cycling = True
